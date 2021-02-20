@@ -14,8 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 Route::get('login', function () {
-    return view('welcome');
+    return view('auth/login');
 });
+Route::get('register', function () {
+    return view('auth/register');
+});
+Route::get('dashboard', function () {
+    return view('admin/common/dashboard');
+})->middleware('auth');
+
+Auth::routes();
+
+Route::get('customeradd', [App\Http\Controllers\Admin\CustomerController::class, 'add']);
+Route::get('customerlist', [App\Http\Controllers\Admin\CustomerController::class, 'read']);
+Route::post('customer/store', [App\Http\Controllers\Admin\CustomerController::class, 'store']);
+
+// Route::post('newinvoice', [App\Http\Controllers\Admin\InvoiceController::class, 'store']);
+Route::get('invoicelist', [App\Http\Controllers\Admin\InvoiceController::class, 'read']);

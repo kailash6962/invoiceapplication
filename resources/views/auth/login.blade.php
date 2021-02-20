@@ -182,18 +182,31 @@ fieldset{
 </style>
 <div class="main">
     
-    
-    <div class="container">
+<div class="container">
 <center>
 <div class="middle">
       <div id="login">
 
-        <form method="POST">
-
+        <form method="POST" action="{{ route('login') }}">
+        @csrf
           <fieldset class="clearfix">
 
-            <p ><span class="fa fa-user"></span><input type="text" name="username" Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p><span class="fa fa-lock"></span><input type="password" name="password" Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+            <p ><span class="fa fa-user"></span>
+                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                </p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p><span class="fa fa-lock"></span>
+            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+            @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+            </p> <!-- JS because of IE support; better: placeholder="Password" -->
             
              <div>
                                 <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Forgot

@@ -1,8 +1,7 @@
-<?php//set title
-function set_title(){
-return __SITE_NAME__ . ' - Dashboard';
-}
-?>
+@extends('admin.master')
+@section('title', 'Dashboard')
+
+@section('content')
 <!-- Grid row -->
 <div class="row">
 
@@ -624,3 +623,4 @@ return __SITE_NAME__ . ' - Dashboard';
 
 </div>
 <!-- Grid row -->
+@endsection
