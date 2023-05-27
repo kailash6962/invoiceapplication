@@ -16,15 +16,21 @@
   <!-- Material Design Bootstrap -->
   <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
   <!-- autocomplete -->
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-  <style>
-
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+  <!-- Jquery and ajax -->
+  <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+  <!-- Autocomplete -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body class="fixed-sn white-skin ">
-
+<script>
+   function autocomplete(field,values) {
+      $(field).autocomplete({
+        source: values
+      });
+    }
+</script>
   <!-- Main Navigation -->
   <header>
 
@@ -80,6 +86,21 @@
                   </li>
                   <li>
                     <a href="invoicelist" class="waves-effect">Invoice List</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a class="collapsible-header waves-effect arrow-r">
+                <i class="w-fa far fa-check-square"></i>Item<i class="fas fa-angle-down rotate-icon"></i>
+              </a>
+              <div class="collapsible-body">
+                <ul>
+                  <li>
+                    <a href="itemlist" class="waves-effect">Item List</a>
+                  </li>
+                  <li>
+                    <a href="itemadd" class="waves-effect">Item Add</a>
                   </li>
                 </ul>
               </div>
@@ -243,8 +264,8 @@
   <!-- Footer -->
 
   <!-- SCRIPTS -->
-   <!-- Jquery and ajax -->
-   <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+  <!-- Jquery and ajax -->
+  <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
   <!-- Bootstrap core JavaScript -->
@@ -254,7 +275,15 @@
   <!-- Sweet alert 2-->
   <script type="text/javascript" src="{{ asset('js/sweetalert2.js') }}"></script>
   <!-- Autocomplete -->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js') }}"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- show toast message -->
+  @if(Session::has('success'))
+  <script> 
+      var message = '{{session('success')}}';
+      toastr.success(message); 
+  </script>
+  @endif
   <!--DataTables-->
   <script src="{{ asset('datatables/dataTables.min.js') }}" ></script>
   <script src="{{ asset('datatables/dataTables.buttons.min.js') }}" ></script>
@@ -372,12 +401,10 @@
         $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
         $('.gradient-card-header').toggleClass('white black lighten-4');
         $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
-
       });
     });
 
   </script>
-
 </body>
 
 </html>

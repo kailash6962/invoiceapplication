@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Session;
 use App\Models\Admin\Item;
+
 use Auth;
 
 class ItemController extends Controller
@@ -24,5 +26,21 @@ class ItemController extends Controller
             $itemcode++;
         }
         return view('admin/item/itemadd')->with('itemcode',$itemcode);
+    }
+    function read(){
+        $useremail = Auth::user()->email;
+        $items = Item::where('username',$useremail)->get();
+        return view('admin/item/itemlist')->with('items',$items);
+    }
+    function store(Request $request){
+        $item = new Item();
+        $item->item_code = $request->input('item_code');
+        $item->item_name = $request->input('item_name');
+        $item->item_price = $request->input('item_price');
+        $item->username = Auth::user()->email;
+        $item->date_added = date('y-m-d');
+        $item->save();
+        Session::flash('success','Item Added Successfully.');
+        return redirect()->back();
     }
 }

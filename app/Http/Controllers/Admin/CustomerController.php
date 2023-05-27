@@ -32,6 +32,11 @@ class CustomerController extends Controller
         $customers = Customers::where('username',$useremail)->get();
         return view('admin/customer/customerlist')->with('customers',$customers);
     }
+    function get_first(Request $request){
+        $useremail = Auth::user()->email;
+        $customers = Customers::where('username',$useremail)->where('cust_name',$request->cust_name)->first();
+        return $customers;
+    }
     function store(Request $request){
         $customer = new Customers();
         $customer->cust_code = $request->input('cust_code');

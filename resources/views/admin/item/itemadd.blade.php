@@ -2,6 +2,15 @@
 @section('title', 'Item Add')
 
 @section('content')
+
+@if(Session::has('success'))
+<!-- show toast message -->
+<script> 
+    var message = '{{session('success')}}';
+    toastr.success(message); 
+</script>
+@endif
+
      <!-- Card image -->
 <div class="card card-cascade narrower z-depth-1">
 
@@ -26,78 +35,28 @@
 
       <div class="row">
         <div class="col-sm-6">
-          <form method="POST" id="newinvoice-form" autocomplete="off">
+        {{Form::open(array('url'=>'item/store','method'=>'post'))}}
           <div class="form-group">
-              <label>Shop Name</label>
-              <input type="text" class="form-control" autofocus name="cust_name" id="cust_name" placeholder="Eg: Megamart" onkeyup="$('#cust_name_val').css('display','none');getcustdetails($(this).val());">
-              <p id="cust_name_val" class="form_valid_strings">Please enter Shop Name.</p>
+              <label>Item Code</label>
+              <input type="text" class="form-control" value="{{$itemcode}}" name="item_code" id="item_code" readonly>
             </div>
             <div class="form-group">
-              <label>Shop Code</label>
-              <input type="text" class="form-control" name="cust_code" id="cust_code" placeholder="" readonly>
+              <label>Item Name</label>
+              <input type="text" class="form-control" name="item_name" id="item_name" placeholder="" autofocus>
             </div>
             <div class="form-group">
-              <label>Address Line 1</label>
-              <input type="text" class="form-control" name="address" id="address1" placeholder="Eg: Plot no, Street" readonly>
-            </div>
-            <div class="form-group">
-              <label>Item</label>
-              <input type="text" class="form-control" name="item" id="item" placeholder="" onkeyup="$('#item_val').css('display','none');">
-              <p id="item_val" class="form_valid_strings">Please enter Product.</p>
-            </div>
-            <div class="form-group">
-              <label>Quantity</label>
-              <input type="text" class="form-control" name="quantity" id="quantity" onkeyup="$('#quantity_val').css('display','none');">
-              <p id="quantity_val" class="form_valid_strings">Please enter Quantity.</p>
+              <label>Item Price</label>
+              <input type="text" class="form-control" name="item_price" id="item_price" placeholder="">
             </div>
           </div>
         <div class="col-sm-6">
-        <div class="form-group">
-            <label>Rate per Item</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">1pcs</div>
-              </div>
-              <input type="number" class="form-control" required name="price" id="rate" placeholder="" onkeyup="$('#rate_val').css('display','none');calculateamount();">
-              <p id="rate_val" class="form_valid_strings">Please enter Product Rate.</p>
-            </div>
-          </div>
-            <div class="form-group">
-              <label>Grand Total</label>
-              <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">&#8377; </div>
-              </div>
-              <input type="text" class="form-control" name="inv_amt" id="grand_amt" placeholder="" readonly>
-              <p id="grand_val" class="form_valid_strings">Amount Invalid.</p>
-            </div>
-            </div>
-            <div class="form-group">
-              <label>Amount Paid</label>
-              <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">&#8377; </div>
-              </div>
-              <input type="text" class="form-control" name="amt_paid" id="amt_paid" placeholder="" onkeyup="calculatepending()">
-            </div>
-            </div>
-            <div class="form-group">
-              <label>Pending</label>
-              <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">&#8377; </div>
-              </div>
-              <input type="text" class="form-control" name="amt_due" id="amt_due" placeholder="" readonly>
-            </div>
-            </div>
         </div>
         </div>
         <div class="form-group mt-4 d-flex float-right">
-          <input type="text" class="hidden" name="status" id="status">
-          <button type="button" id="newinvoice" class="btn btn-success mr-2">Submit</button>
-          <button type="reset" class="btn btn-warning" >Clear</button>
+          <button type="submit" name="saveitem" class="btn btn-success mr-2">Save</button>
+          <button type="reset" class="btn btn-warning">Clear</button>
         </div>
-        </form>
+        {{Form::close()}}
     </div>
   </div>
   @endsection

@@ -56,8 +56,14 @@
                       <label class="form-check-label" for="checkbox1" class="label-table"></label>
                     </td>
                     <td>{{$invoice->cust_code}}</td>
+                    <td>{{$invoice->inv_no}}</td>
+                    <td>{{$invoice->item}}</td>
+                    <td>{{$invoice->quantity}}</td>
+                    <td>{{$invoice->inv_amt}}</td>
+                    <td>{{$invoice->date_added}}</td>
+                    <td>{{$invoice->status}}</td>
                     <td>
-                          <div>
+                    <div>
                       <a  target="_blank" href='invoice?invno={{$invoice->id}}'><button type="button" class="btn btn-outline-black btn-rounded btn-sm px-2"><i class="fas fa-print"></i></button></a>
                       <button onclick="getinvoicedata(this)" type="button" data-toggle="modal" data-target="#updateinvoice" id="{{$invoice->id}}" class="btn btn-outline-blue btn-rounded btn-sm px-2"><i class="fas fa-rupee-sign"></i></button>
                     </div></td>
